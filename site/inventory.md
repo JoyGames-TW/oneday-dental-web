@@ -1,0 +1,126 @@
+# Site Inventory
+
+- Source: https://dr-allon4.com.tw/
+- Discovery method: robots.txt + sitemap.xml + post-sitemap.xml + page-sitemap.xml
+- Snapshot date: 2026-03-22
+
+## Sitemaps
+
+- https://dr-allon4.com.tw/post-sitemap.xml
+- https://dr-allon4.com.tw/page-sitemap.xml
+
+## Page Sitemap URLs
+
+- https://dr-allon4.com.tw/
+- https://dr-allon4.com.tw/cases/minimally-invasive/
+- https://dr-allon4.com.tw/service/flapless/
+- https://dr-allon4.com.tw/service/allon4/
+- https://dr-allon4.com.tw/service/periodontal/
+- https://dr-allon4.com.tw/service/tci/
+- https://dr-allon4.com.tw/service/reconstruction/
+- https://dr-allon4.com.tw/service/
+- https://dr-allon4.com.tw/service/porcelain/
+- https://dr-allon4.com.tw/video/
+- https://dr-allon4.com.tw/video/treatment-introduction/
+- https://dr-allon4.com.tw/video/patient-testimonials/
+- https://dr-allon4.com.tw/recommend/
+- https://dr-allon4.com.tw/recommend/google-good/
+- https://dr-allon4.com.tw/recommend/fb-good/
+- https://dr-allon4.com.tw/cases/
+- https://dr-allon4.com.tw/news/
+- https://dr-allon4.com.tw/news/medical-knowledge/
+- https://dr-allon4.com.tw/news/about-the-doctor/
+- https://dr-allon4.com.tw/certificate/
+- https://dr-allon4.com.tw/map/
+
+## Post Sitemap URLs
+
+- https://dr-allon4.com.tw/333/
+- https://dr-allon4.com.tw/331/
+- https://dr-allon4.com.tw/329/
+- https://dr-allon4.com.tw/327/
+- https://dr-allon4.com.tw/340/
+- https://dr-allon4.com.tw/343/
+- https://dr-allon4.com.tw/346/
+- https://dr-allon4.com.tw/348/
+- https://dr-allon4.com.tw/350/
+- https://dr-allon4.com.tw/352/
+- https://dr-allon4.com.tw/354/
+- https://dr-allon4.com.tw/356/
+- https://dr-allon4.com.tw/358/
+- https://dr-allon4.com.tw/360/
+- https://dr-allon4.com.tw/363/
+- https://dr-allon4.com.tw/367/
+- https://dr-allon4.com.tw/369/
+- https://dr-allon4.com.tw/371/
+- https://dr-allon4.com.tw/373/
+- https://dr-allon4.com.tw/375/
+- https://dr-allon4.com.tw/382/
+- https://dr-allon4.com.tw/385/
+- https://dr-allon4.com.tw/388/
+- https://dr-allon4.com.tw/391/
+- https://dr-allon4.com.tw/394/
+- https://dr-allon4.com.tw/397/
+- https://dr-allon4.com.tw/400/
+- https://dr-allon4.com.tw/403/
+- https://dr-allon4.com.tw/406/
+- https://dr-allon4.com.tw/411/
+- https://dr-allon4.com.tw/414/
+- https://dr-allon4.com.tw/424/
+- https://dr-allon4.com.tw/417/
+- https://dr-allon4.com.tw/427/
+- https://dr-allon4.com.tw/430/
+- https://dr-allon4.com.tw/433/
+- https://dr-allon4.com.tw/436/
+- https://dr-allon4.com.tw/439/
+- https://dr-allon4.com.tw/442/
+- https://dr-allon4.com.tw/449/
+- https://dr-allon4.com.tw/452/
+- https://dr-allon4.com.tw/458/
+- https://dr-allon4.com.tw/455/
+- https://dr-allon4.com.tw/1169/
+- https://dr-allon4.com.tw/1171/
+- https://dr-allon4.com.tw/1180/
+- https://dr-allon4.com.tw/1190/
+- https://dr-allon4.com.tw/1197/
+- https://dr-allon4.com.tw/1200/
+- https://dr-allon4.com.tw/1154/
+- https://dr-allon4.com.tw/1235/
+- https://dr-allon4.com.tw/1239/
+- https://dr-allon4.com.tw/1243/
+- https://dr-allon4.com.tw/1246/
+- https://dr-allon4.com.tw/1249/
+- https://dr-allon4.com.tw/1252/
+- https://dr-allon4.com.tw/1259/
+- https://dr-allon4.com.tw/1262/
+- https://dr-allon4.com.tw/1264/
+- https://dr-allon4.com.tw/1266/
+- https://dr-allon4.com.tw/1268/
+- https://dr-allon4.com.tw/1270/
+- https://dr-allon4.com.tw/1272/
+- https://dr-allon4.com.tw/1274/
+- https://dr-allon4.com.tw/1276/
+- https://dr-allon4.com.tw/1279/
+- https://dr-allon4.com.tw/1281/
+- https://dr-allon4.com.tw/1283/
+- https://dr-allon4.com.tw/1285/
+- https://dr-allon4.com.tw/1287/
+- https://dr-allon4.com.tw/1289/
+- https://dr-allon4.com.tw/1291/
+- https://dr-allon4.com.tw/1293/
+- https://dr-allon4.com.tw/1295/
+- https://dr-allon4.com.tw/1297/
+- https://dr-allon4.com.tw/1299/
+- https://dr-allon4.com.tw/1301/
+- https://dr-allon4.com.tw/1360/
+- https://dr-allon4.com.tw/1385/
+- https://dr-allon4.com.tw/1410/
+- https://dr-allon4.com.tw/1420/
+- https://dr-allon4.com.tw/1442/
+- https://dr-allon4.com.tw/1458/
+- https://dr-allon4.com.tw/1466/
+- https://dr-allon4.com.tw/1480/
+- https://dr-allon4.com.tw/1495/
+- https://dr-allon4.com.tw/1492/
+- https://dr-allon4.com.tw/1505/
+- https://dr-allon4.com.tw/1509/

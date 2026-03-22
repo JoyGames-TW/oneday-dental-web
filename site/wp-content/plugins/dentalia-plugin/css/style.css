@@ -1,0 +1,17 @@
+/* separators Dentalia 2.0 */
+.wrap-bottom.bottom-svg-inside.bottom-svg-1 .svg-w>svg {
+    transform: scale(1,1) translateY(-100%) translateY(1px);
+}
+
+.wrap-top.top-svg-inside.top-svg-4 .svg-w>svg {
+    transform: scale(1,1) translateY(-1.5px) rotate(180deg);
+}
+
+/* page builder override 9/2021*/
+.panel-grid .so-parallax> div[class^="overlay"] {
+    position:  absolute;
+}
+
+.text-light .description {
+    color: var(--color-p-light);
+}

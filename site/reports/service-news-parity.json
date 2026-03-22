@@ -1,0 +1,92 @@
+﻿[
+    {
+        "route":  "/service/",
+        "status":  "pass",
+        "sec":  "2/2",
+        "img":  "6/6",
+        "iframe":  "1/1",
+        "form":  "3/3",
+        "uploadMissing":  0
+    },
+    {
+        "route":  "/service/allon4/",
+        "status":  "pass",
+        "sec":  "9/9",
+        "img":  "7/7",
+        "iframe":  "1/1",
+        "form":  "3/3",
+        "uploadMissing":  0
+    },
+    {
+        "route":  "/service/flapless/",
+        "status":  "pass",
+        "sec":  "5/5",
+        "img":  "7/7",
+        "iframe":  "1/1",
+        "form":  "3/3",
+        "uploadMissing":  0
+    },
+    {
+        "route":  "/service/periodontal/",
+        "status":  "pass",
+        "sec":  "5/5",
+        "img":  "7/7",
+        "iframe":  "1/1",
+        "form":  "3/3",
+        "uploadMissing":  0
+    },
+    {
+        "route":  "/service/porcelain/",
+        "status":  "pass",
+        "sec":  "4/4",
+        "img":  "6/6",
+        "iframe":  "1/1",
+        "form":  "3/3",
+        "uploadMissing":  0
+    },
+    {
+        "route":  "/service/reconstruction/",
+        "status":  "pass",
+        "sec":  "4/4",
+        "img":  "6/6",
+        "iframe":  "1/1",
+        "form":  "3/3",
+        "uploadMissing":  0
+    },
+    {
+        "route":  "/service/tci/",
+        "status":  "pass",
+        "sec":  "4/4",
+        "img":  "6/6",
+        "iframe":  "1/1",
+        "form":  "3/3",
+        "uploadMissing":  0
+    },
+    {
+        "route":  "/news/",
+        "status":  "pass",
+        "sec":  "1/1",
+        "img":  "6/6",
+        "iframe":  "1/1",
+        "form":  "3/3",
+        "uploadMissing":  0
+    },
+    {
+        "route":  "/news/about-the-doctor/",
+        "status":  "pass",
+        "sec":  "1/1",
+        "img":  "6/6",
+        "iframe":  "1/1",
+        "form":  "3/3",
+        "uploadMissing":  0
+    },
+    {
+        "route":  "/news/medical-knowledge/",
+        "status":  "pass",
+        "sec":  "1/1",
+        "img":  "6/6",
+        "iframe":  "1/1",
+        "form":  "3/3",
+        "uploadMissing":  0
+    }
+]

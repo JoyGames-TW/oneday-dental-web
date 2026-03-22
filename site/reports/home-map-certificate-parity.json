@@ -1,0 +1,29 @@
+﻿[
+    {
+        "route":  "/",
+        "status":  "pass",
+        "sec":  "17/17",
+        "img":  "12/12",
+        "iframe":  "2/2",
+        "form":  "3/3",
+        "uploadMissing":  0
+    },
+    {
+        "route":  "/map/",
+        "status":  "pass",
+        "sec":  "4/4",
+        "img":  "6/6",
+        "iframe":  "1/1",
+        "form":  "3/3",
+        "uploadMissing":  0
+    },
+    {
+        "route":  "/certificate/",
+        "status":  "pass",
+        "sec":  "2/2",
+        "img":  "15/15",
+        "iframe":  "1/1",
+        "form":  "3/3",
+        "uploadMissing":  0
+    }
+]

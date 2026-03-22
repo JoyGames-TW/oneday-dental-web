@@ -1,0 +1,74 @@
+﻿[
+    {
+        "route":  "/cases/",
+        "status":  "pass",
+        "sec":  "1/1",
+        "img":  "6/6",
+        "iframe":  "1/1",
+        "form":  "3/3",
+        "uploadMissing":  0
+    },
+    {
+        "route":  "/cases/minimally-invasive/",
+        "status":  "pass",
+        "sec":  "1/1",
+        "img":  "6/6",
+        "iframe":  "1/1",
+        "form":  "3/3",
+        "uploadMissing":  0
+    },
+    {
+        "route":  "/recommend/",
+        "status":  "pass",
+        "sec":  "1/1",
+        "img":  "6/6",
+        "iframe":  "1/1",
+        "form":  "3/3",
+        "uploadMissing":  0
+    },
+    {
+        "route":  "/recommend/fb-good/",
+        "status":  "pass",
+        "sec":  "1/1",
+        "img":  "6/6",
+        "iframe":  "6/6",
+        "form":  "3/3",
+        "uploadMissing":  0
+    },
+    {
+        "route":  "/recommend/google-good/",
+        "status":  "pass",
+        "sec":  "1/1",
+        "img":  "6/6",
+        "iframe":  "1/1",
+        "form":  "3/3",
+        "uploadMissing":  0
+    },
+    {
+        "route":  "/video/",
+        "status":  "pass",
+        "sec":  "1/1",
+        "img":  "6/6",
+        "iframe":  "1/1",
+        "form":  "3/3",
+        "uploadMissing":  0
+    },
+    {
+        "route":  "/video/patient-testimonials/",
+        "status":  "pass",
+        "sec":  "1/1",
+        "img":  "6/6",
+        "iframe":  "1/1",
+        "form":  "3/3",
+        "uploadMissing":  0
+    },
+    {
+        "route":  "/video/treatment-introduction/",
+        "status":  "pass",
+        "sec":  "1/1",
+        "img":  "6/6",
+        "iframe":  "1/1",
+        "form":  "3/3",
+        "uploadMissing":  0
+    }
+]
