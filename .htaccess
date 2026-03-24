@@ -1,0 +1,15 @@
+# 啟用目錄索引
+<IfModule mod_dir.c>
+    DirectoryIndex index.html index.htm
+</IfModule>
+
+# 重寫引擎開啟
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+    
+    # 如果不是檔案且不是目錄，重寫到 index.html
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^ index.html [L]
+</IfModule>
