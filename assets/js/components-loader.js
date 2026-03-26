@@ -1,17 +1,71 @@
 ﻿(async function () {
+  function unique(arr) {
+    var seen = {};
+    return arr.filter(function (item) {
+      if (seen[item]) return false;
+      seen[item] = true;
+      return true;
+    });
+  }
+
+  function buildFragmentCandidates(fragmentPath) {
+    var candidates = [fragmentPath];
+    var cleanPath = String(fragmentPath || '').replace(/^\/+/, '');
+    if (!cleanPath) return candidates;
+
+    // When opened via file://, absolute paths like /_components/header.html resolve to disk root
+    // and usually fail. Try depth-based relative fallbacks.
+    if (window.location && window.location.protocol === 'file:') {
+      var parts = window.location.pathname.replace(/\\/g, '/').split('/').filter(Boolean);
+      var depth = Math.max(parts.length - 1, 0);
+      var maxDepth = Math.min(depth + 2, 8);
+
+      for (var i = 0; i <= maxDepth; i++) {
+        var prefix = i === 0 ? './' : new Array(i + 1).join('../');
+        candidates.push(prefix + cleanPath);
+      }
+    }
+
+    return unique(candidates);
+  }
+
+  async function fetchFirstAvailable(paths) {
+    for (var i = 0; i < paths.length; i++) {
+      var path = paths[i];
+      try {
+        var res = await fetch(path, { cache: 'no-store' });
+        if (!res.ok) continue;
+        return await res.text();
+      } catch (e) {
+      }
+    }
+    return null;
+  }
+
   async function hydrate(placeholderSelector, fragmentPath) {
     var placeholder = document.querySelector(placeholderSelector);
     if (!placeholder) return;
     try {
-      var res = await fetch(fragmentPath, { cache: "no-store" });
-      if (!res.ok) return;
-      var html = await res.text();
+      var candidates = buildFragmentCandidates(fragmentPath);
+      var html = await fetchFirstAvailable(candidates);
+      if (!html) {
+        if (window.location && window.location.protocol === 'file:' && placeholderSelector === '[data-component="site-header"]') {
+          placeholder.innerHTML = '<div style="padding:12px 16px;border:1px solid #d9d9d9;background:#fffbe6;color:#8a6d3b;font-size:13px;">Topbar 元件在 file:// 模式無法載入，請改用本機伺服器開啟（例如 http://localhost）。</div>';
+        }
+        if (window.console && console.warn) {
+          console.warn('Component load failed:', placeholderSelector, candidates);
+        }
+        return;
+      }
       var wrap = document.createElement("div");
       wrap.innerHTML = html;
       var node = wrap.firstElementChild;
       if (!node) return;
       placeholder.replaceWith(node);
     } catch (e) {
+      if (window.console && console.warn) {
+        console.warn('Hydrate failed:', placeholderSelector, fragmentPath, e);
+      }
     }
   }
 
