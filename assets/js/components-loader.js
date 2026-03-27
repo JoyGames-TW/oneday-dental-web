@@ -1,4 +1,77 @@
 ﻿(async function () {
+  function normalizeBasePath(pathname) {
+    if (!pathname || pathname === '/') return '';
+    return '/' + String(pathname).replace(/^\/+|\/+$/g, '');
+  }
+
+  function detectSiteBasePath() {
+    var marker = '/assets/js/components-loader.js';
+    var scripts = document.getElementsByTagName('script');
+
+    for (var i = scripts.length - 1; i >= 0; i--) {
+      var src = scripts[i].getAttribute('src') || scripts[i].src;
+      if (!src) continue;
+
+      try {
+        var url = new URL(src, window.location.href);
+        var pathname = String(url.pathname || '');
+        var markerIndex = pathname.lastIndexOf(marker);
+        if (markerIndex === -1) continue;
+
+        return normalizeBasePath(pathname.slice(0, markerIndex));
+      } catch (e) {
+      }
+    }
+
+    return '';
+  }
+
+  function getCurrentPathDepth() {
+    if (!window.location || !window.location.pathname) return 0;
+
+    var parts = window.location.pathname.replace(/\\/g, '/').split('/').filter(Boolean);
+    if (!parts.length) return 0;
+
+    var lastPart = parts[parts.length - 1];
+    if (lastPart.indexOf('.') !== -1) {
+      return Math.max(parts.length - 1, 0);
+    }
+
+    return parts.length;
+  }
+
+  function rewriteRootRelativeUrls(rootEl, basePath) {
+    if (!rootEl || !basePath) return;
+
+    var attrs = ['href', 'src', 'action', 'poster'];
+    var selector = attrs.map(function (attr) {
+      return '[' + attr + ']';
+    }).join(',');
+
+    function rewrite(el) {
+      for (var i = 0; i < attrs.length; i++) {
+        var attr = attrs[i];
+        var value = el.getAttribute(attr);
+        if (!value) continue;
+
+        value = value.trim();
+        if (!value || value.charAt(0) !== '/') continue;
+        if (value.indexOf('//') === 0) continue;
+        if (value === basePath || value.indexOf(basePath + '/') === 0) continue;
+
+        el.setAttribute(attr, basePath + value);
+      }
+    }
+
+    if (rootEl.matches && rootEl.matches(selector)) {
+      rewrite(rootEl);
+    }
+
+    rootEl.querySelectorAll(selector).forEach(rewrite);
+  }
+
+  var SITE_BASE_PATH = detectSiteBasePath();
+
   function unique(arr) {
     var seen = {};
     return arr.filter(function (item) {
@@ -13,17 +86,23 @@
     var cleanPath = String(fragmentPath || '').replace(/^\/+/, '');
     if (!cleanPath) return candidates;
 
+    if (SITE_BASE_PATH) {
+      candidates.push(SITE_BASE_PATH + '/' + cleanPath);
+    }
+
+    // Try depth-based relative fallbacks so nested pages can locate shared components.
+    var depth = getCurrentPathDepth();
+    var maxDepth = Math.min(depth + 2, 10);
+
+    for (var i = 0; i <= maxDepth; i++) {
+      var prefix = i === 0 ? './' : new Array(i + 1).join('../');
+      candidates.push(prefix + cleanPath);
+    }
+
     // When opened via file://, absolute paths like /_components/header.html resolve to disk root
     // and usually fail. Try depth-based relative fallbacks.
     if (window.location && window.location.protocol === 'file:') {
-      var parts = window.location.pathname.replace(/\\/g, '/').split('/').filter(Boolean);
-      var depth = Math.max(parts.length - 1, 0);
-      var maxDepth = Math.min(depth + 2, 8);
-
-      for (var i = 0; i <= maxDepth; i++) {
-        var prefix = i === 0 ? './' : new Array(i + 1).join('../');
-        candidates.push(prefix + cleanPath);
-      }
+      candidates.push('/' + cleanPath);
     }
 
     return unique(candidates);
@@ -59,6 +138,7 @@
       }
       var wrap = document.createElement("div");
       wrap.innerHTML = html;
+      rewriteRootRelativeUrls(wrap, SITE_BASE_PATH);
       var node = wrap.firstElementChild;
       if (!node) return;
       placeholder.replaceWith(node);
@@ -195,8 +275,8 @@
     });
   }
 
-  await hydrate('[data-component="site-header"]', '/_components/header.html');
-  await hydrate('[data-component="site-footer"]', '/_components/footer.html');
+  await hydrate('[data-component="site-header"]', '_components/header.html');
+  await hydrate('[data-component="site-footer"]', '_components/footer.html');
 
   // Run once now and once shortly after to cover late inline script init order.
   applyScopedSwiperFix();
