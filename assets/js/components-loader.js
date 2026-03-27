@@ -339,80 +339,12 @@
     });
   }
 
-  function initMobileFloatingUi() {
-    var root = document.querySelector('.shared-mobile-floating-ui');
-    if (!root || root.getAttribute('data-initialized') === '1') return;
-
-    root.setAttribute('data-initialized', '1');
-
-    var fabToggle = root.querySelector('#fabToggle');
-    if (fabToggle && fabToggle.getAttribute('data-bound') !== '1') {
-      fabToggle.setAttribute('data-bound', '1');
-      fabToggle.addEventListener('click', function () {
-        this.classList.toggle('active');
-        if (this.parentElement) {
-          this.parentElement.classList.toggle('active');
-        }
-      });
-    }
-
-    var btnTop = root.querySelector('#btnTop');
-    if (btnTop && btnTop.getAttribute('data-bound') !== '1') {
-      btnTop.setAttribute('data-bound', '1');
-      btnTop.addEventListener('click', function (e) {
-        e.preventDefault();
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      });
-    }
-
-    function updateFloatingOpacity() {
-      var scrollTop = window.pageYOffset || document.documentElement.scrollTop || 0;
-      var windowHeight = window.innerHeight || document.documentElement.clientHeight || 0;
-      var documentHeight = Math.max(
-        document.body ? document.body.scrollHeight : 0,
-        document.documentElement ? document.documentElement.scrollHeight : 0
-      );
-      var scrollBottom = documentHeight - (scrollTop + windowHeight);
-
-      var fadePoint = 500;
-      var disappearPoint = 200;
-      var opacity = 1;
-
-      if (scrollBottom <= disappearPoint) {
-        opacity = 0;
-      } else if (scrollBottom <= fadePoint) {
-        opacity = (scrollBottom - disappearPoint) / (fadePoint - disappearPoint);
-      }
-
-      var btnRight = root.querySelector('.btnRight');
-      var footShort = root.querySelector('.footShort');
-      if (btnRight) btnRight.style.opacity = String(opacity);
-      if (footShort) footShort.style.opacity = String(opacity);
-    }
-
-    if (window.__mobileFloatingOpacityHandler) {
-      window.removeEventListener('scroll', window.__mobileFloatingOpacityHandler);
-      window.removeEventListener('resize', window.__mobileFloatingOpacityHandler);
-    }
-
-    window.__mobileFloatingOpacityHandler = updateFloatingOpacity;
-    window.addEventListener('scroll', updateFloatingOpacity, { passive: true });
-    window.addEventListener('resize', updateFloatingOpacity);
-    updateFloatingOpacity();
-  }
-
   await Promise.all([
     hydrate('[data-component="site-header"]', '_components/header.html'),
-    hydrate('[data-component="site-footer"]', '_components/footer.html'),
-    hydrate('[data-component="site-mobile-floating"]', '_components/mobile-floating-ui.html')
+    hydrate('[data-component="site-footer"]', '_components/footer.html')
   ]);
-
-  initMobileFloatingUi();
 
   // Run once now and once shortly after to cover late inline script init order.
   applyScopedSwiperFix();
-  setTimeout(function () {
-    applyScopedSwiperFix();
-    initMobileFloatingUi();
-  }, 120);
+  setTimeout(applyScopedSwiperFix, 120);
 })();
