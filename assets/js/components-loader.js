@@ -1,4 +1,41 @@
 ﻿(async function () {
+  var COMPONENT_CACHE_VERSION = '2026-03-27';
+  var COMPONENT_CACHE_TTL_MS = 24 * 60 * 60 * 1000;
+
+  function getComponentCacheKey(fragmentPath) {
+    return 'component-html::' + COMPONENT_CACHE_VERSION + '::' + String(fragmentPath || '');
+  }
+
+  function readCachedComponent(fragmentPath) {
+    try {
+      if (!window.localStorage) return null;
+      var raw = window.localStorage.getItem(getComponentCacheKey(fragmentPath));
+      if (!raw) return null;
+
+      var parsed = JSON.parse(raw);
+      if (!parsed || typeof parsed.html !== 'string') return null;
+      if (typeof parsed.expiresAt === 'number' && Date.now() > parsed.expiresAt) return null;
+
+      return parsed.html;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  function writeCachedComponent(fragmentPath, html) {
+    try {
+      if (!window.localStorage || typeof html !== 'string' || !html) return;
+
+      var payload = {
+        html: html,
+        expiresAt: Date.now() + COMPONENT_CACHE_TTL_MS
+      };
+
+      window.localStorage.setItem(getComponentCacheKey(fragmentPath), JSON.stringify(payload));
+    } catch (e) {
+    }
+  }
+
   function normalizeBasePath(pathname) {
     if (!pathname || pathname === '/') return '';
     return '/' + String(pathname).replace(/^\/+|\/+$/g, '');
@@ -124,9 +161,40 @@
   async function hydrate(placeholderSelector, fragmentPath) {
     var placeholder = document.querySelector(placeholderSelector);
     if (!placeholder) return;
+
+    var cachedHtml = readCachedComponent(fragmentPath);
+
+    function mount(html) {
+      if (!html || !placeholder.parentNode) return false;
+
+      var wrap = document.createElement("div");
+      wrap.innerHTML = html;
+      rewriteRootRelativeUrls(wrap, SITE_BASE_PATH);
+
+      var node = wrap.firstElementChild;
+      if (!node) return false;
+
+      placeholder.replaceWith(node);
+      return true;
+    }
+
     try {
+      var mountedFromCache = false;
+      if (cachedHtml) {
+        mountedFromCache = mount(cachedHtml);
+      }
+
       var candidates = buildFragmentCandidates(fragmentPath);
       var html = await fetchFirstAvailable(candidates);
+
+      if (html) {
+        writeCachedComponent(fragmentPath, html);
+      }
+
+      if (mountedFromCache) {
+        return;
+      }
+
       if (!html) {
         if (window.location && window.location.protocol === 'file:' && placeholderSelector === '[data-component="site-header"]') {
           placeholder.innerHTML = '<div style="padding:12px 16px;border:1px solid #d9d9d9;background:#fffbe6;color:#8a6d3b;font-size:13px;">Topbar 元件在 file:// 模式無法載入，請改用本機伺服器開啟（例如 http://localhost）。</div>';
@@ -136,12 +204,8 @@
         }
         return;
       }
-      var wrap = document.createElement("div");
-      wrap.innerHTML = html;
-      rewriteRootRelativeUrls(wrap, SITE_BASE_PATH);
-      var node = wrap.firstElementChild;
-      if (!node) return;
-      placeholder.replaceWith(node);
+
+      mount(html);
     } catch (e) {
       if (window.console && console.warn) {
         console.warn('Hydrate failed:', placeholderSelector, fragmentPath, e);
@@ -275,8 +339,10 @@
     });
   }
 
-  await hydrate('[data-component="site-header"]', '_components/header.html');
-  await hydrate('[data-component="site-footer"]', '_components/footer.html');
+  await Promise.all([
+    hydrate('[data-component="site-header"]', '_components/header.html'),
+    hydrate('[data-component="site-footer"]', '_components/footer.html')
+  ]);
 
   // Run once now and once shortly after to cover late inline script init order.
   applyScopedSwiperFix();
